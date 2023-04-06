@@ -1,8 +1,8 @@
 <template>
   <div class="max-w-4xl text-center pt-8 px-4">
-    <h1 class="text-3xl font-semibold mb-8">This is the Home page</h1>
+    <h1 class="text-3xl font-semibold mb-8">Check out the Crypto Character collection !</h1>
 
-    <div class="flex flex-wrap justify-between gap-y-6 mt-4">
+    <div class="flex flex-wrap justify-between gap-y-6 mt-4 max-h-[500px] overflow-y-auto">
       <NFTCard v-for="(nft, index) in nfts.data" :key="index" :index="index" :nft="nft" />
     </div>
   </div>
@@ -25,7 +25,7 @@ let contract;
 async function getCharacters() {
   contract = new web3.eth.Contract(abi as any, CONTRACT);
   
-  return contract.methods.getCharacters().call();
+  // return contract.methods.getCharacters().call();
 }
 
 onMounted(async () => {
