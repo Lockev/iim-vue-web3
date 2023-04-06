@@ -35,13 +35,16 @@ const toast = inject('toast') as any
 const connectWallet = async () => {
   try {
     window.ethereum.request({ method: 'eth_requestAccounts' })
-    .then(() => {
-      connected.value = true; 
+    .then((e) => {
+      console.log(e);
+      connected.value = true;
+
+      toast.success = true;
+      toast.title = 'Wallet connected';
+      toast.message = 'You have successfully connected your wallet';
     });
 
-    toast.success = true;
-    toast.title = 'Wallet connected';
-    toast.message = 'You have successfully connected your wallet';
+
   } catch (error) {
     toast.success = false;
     toast.title = 'Wallet not connected';
