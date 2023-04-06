@@ -14,16 +14,16 @@ contract CryptoCharacter is ERC721 {
         ERC721(_name, _symbol) {        
         cost = _cost;
 
-        characters.push(Character("Nicolas", address(0x0), "Qmb7WGCT77uNa38oLJqRAkjDxQZsjuKnRFY3RKPPBe8gMv"));
-        characters.push(Character("Nicolas2", address(0x0), "QmQkz7R2RiNyGVckR2WuDNf37wucBBg1ywM3anPnngi4Tm"));
-        characters.push(Character("Guillaume", address(0x0), "QmaT5PtZGSDLGPMn6as6QGhiXRhfE9Rbky98cLj7yXyCTm"));
-        characters.push(Character("Guillaume2", address(0x0), "QmdrSSMQrmpZdFiHMWFrvSou8M7us993fo3mHucA65WU1S"));
-        characters.push(Character("Gaelle", address(0x0), "QmYfJNHPBMzoav65CwoZ38eJFpSRtWUM5MBKp6jTkm8Lqs"));
-        characters.push(Character("Antoine", address(0x0), "QmZjpkT68hh78yKBejtRutEDC2Gz2coUGV4cYuTVD1XTw6"));
-        characters.push(Character("Lydia", address(0x0), "QmbXGrva3sBefjC4GQdvgzxSCJ7hbZszt5b4RhKkwgGDYv"));
-        characters.push(Character("Paul-Olivier", address(0x0), "QmRguBErkDF6JEfkJogHwPxygVT1McLYzhrNPZvPdox5J9"));
-        characters.push(Character("Ruben", address(0x0), "QmT7X2pDWGs3TFiH5hiE58izrkfZb7opZJCPECkzzURGLk"));
-        characters.push(Character("Jules", address(0x0), "QmbPqHjupk669rgZCuJkvFSaWXrcNHbiovou6Tx8knWXUK"));
+        characters.push(Character("Nicolas", address(0x0), "https://gateway.pinata.cloud/ipfs/Qmb7WGCT77uNa38oLJqRAkjDxQZsjuKnRFY3RKPPBe8gMv"));
+        characters.push(Character("Nicolas2", address(0x0), "https://gateway.pinata.cloud/ipfs/QmQkz7R2RiNyGVckR2WuDNf37wucBBg1ywM3anPnngi4Tm"));
+        characters.push(Character("Guillaume", address(0x0), "https://gateway.pinata.cloud/ipfs/QmaT5PtZGSDLGPMn6as6QGhiXRhfE9Rbky98cLj7yXyCTm"));
+        characters.push(Character("Guillaume2", address(0x0), "https://gateway.pinata.cloud/ipfs/QmdrSSMQrmpZdFiHMWFrvSou8M7us993fo3mHucA65WU1S"));
+        characters.push(Character("Gaelle", address(0x0), "https://gateway.pinata.cloud/ipfs/QmYfJNHPBMzoav65CwoZ38eJFpSRtWUM5MBKp6jTkm8Lqs"));
+        characters.push(Character("Antoine", address(0x0), "https://gateway.pinata.cloud/ipfs/QmZjpkT68hh78yKBejtRutEDC2Gz2coUGV4cYuTVD1XTw6"));
+        characters.push(Character("Lydia", address(0x0), "https://gateway.pinata.cloud/ipfs/QmbXGrva3sBefjC4GQdvgzxSCJ7hbZszt5b4RhKkwgGDYv"));
+        characters.push(Character("Paul-Olivier", address(0x0), "https://gateway.pinata.cloud/ipfs/QmRguBErkDF6JEfkJogHwPxygVT1McLYzhrNPZvPdox5J9"));
+        characters.push(Character("Ruben", address(0x0), "https://gateway.pinata.cloud/ipfs/QmT7X2pDWGs3TFiH5hiE58izrkfZb7opZJCPECkzzURGLk"));
+        characters.push(Character("Jules", address(0x0), "https://gateway.pinata.cloud/ipfs/QmbPqHjupk669rgZCuJkvFSaWXrcNHbiovou6Tx8knWXUK"));
     }
 
     struct Character {
