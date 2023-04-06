@@ -10,8 +10,8 @@
 
       <div class="flex flex-col gap-2 p-4 sm:pr-20 font-medium rounded-xl border border-dashed	border-gray-300">
         <h1 class="text-xl">{{ nft.price }} ETH <span class="font-light text-sm text-gray-500">(2.85 USD)</span></h1>
-        <button 
-          class="py-2 px-4 transition duration-200 bg-pink-600 text-white font-bold rounded-lg" hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-pink-700 
+        <button
+          class="py-2 px-4 transition duration-200 bg-pink-600 text-white font-bold rounded-lg hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-pink-700"
           @click="buyNFT"
         >
           Buy
