@@ -1,13 +1,5 @@
 <template>
   <button
-    v-if="!network_ok"
-    @click="switchNetwork()"
-    class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-pink-700"
-  >
-    Wrong network. Switch to {{ targetNetwork }}
-  </button>
-  <button
-    v-else
     type="button"
     :disabled="walletStore.address != ''"
     :class="walletStore.address == '' ? 'hover:bg-indigo-600' : ''"
@@ -26,74 +18,48 @@
         clip-rule="evenodd"
       />
     </svg>
-    <span class="">{{
-      walletStore.address != ''
-        ? `Connected Acc ${walletStore.acc_short}`
-        : `Connect Wallet`
-    }}</span>
+    <span class="">{{ walletStore?.address != '' ? `Connected Acc ${walletStore.acc_short}` : `Connect Wallet` }}</span>
   </button>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
+<script lang="ts" setup>
+import { onMounted, ref, inject } from 'vue'
 import { useWalletStore } from '../stores/wallet'
+import Web3 from 'web3';
 
-export default defineComponent({
-  async mounted() {
-    await this.checkNetwork()
-  },
-  computed: {},
-  setup() {
-    const walletStore = useWalletStore()
-    const targetNetwork = import.meta.env.VITE_BLOCKCHAIN_NETWORK_NAME
-    const targetNetworkId = import.meta.env.VITE_BLOCKCHAIN_NETWORK_ID
-    const network_ok = ref<boolean>(false)
+const walletStore = useWalletStore()
 
-    // checks if current chain matches with the one provided in env variable
-    const checkNetwork = async () => {
-      if (window.ethereum) {
-        const currentChainId = await window.ethereum.request({
-          method: 'eth_chainId',
-        })
+const connected = ref(false);
+const toast = inject('toast') as any
 
-        if (currentChainId == targetNetworkId) network_ok.value = true
-      }
-    }
-    // switches network to the one provided in env variable
-    const switchNetwork = async () => {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: targetNetworkId }],
+const connectWallet = async () => {
+  try {
+    window.ethereum.request({ method: 'eth_requestAccounts' })
+    .then((data: string[]) => {
+      walletStore.saveWalletData({
+        address: data[0],
+        acc_short: ''
       })
-      // refresh
-      window.location.reload()
-    }
-    // checks network and connects wallet
-    const connectWallet = async () => {
-      if (!network_ok.value) await switchNetwork()
-      try {
-        // @ts-expect-error Window.ethereum not typed
-        const data = await window.ethereum.request({
-          method: 'eth_requestAccounts',
-        })
-        console.log('data :>> ', data)
+      connected.value = true;
 
-        walletStore.saveWalletData({ address: data[0] })
-        console.log('DApp connected to your wallet 💰')
-      } catch (error) {
-        console.error('Error connecting DApp to your wallet')
-        console.error(error)
-      }
-    }
-    return {
-      connectWallet,
-      walletStore,
-      checkNetwork,
-      switchNetwork,
-      network_ok,
-      targetNetwork,
-    }
-  },
-})
+      toast.success = true;
+      toast.title = 'Wallet connected';
+      toast.message = 'You have successfully connected your wallet';
+    });
+
+
+  } catch (error) {
+    toast.success = false;
+    toast.title = 'Wallet not connected';
+    toast.message = 'There was an error connecting your wallet';
+  }
+}
+
+onMounted(() => {
+  if (!window.ethereum) {
+    toast.success = false;
+    toast.title = 'MetaMask not found';
+    toast.message = 'Please install MetaMask';
+  }
+});
 </script>
