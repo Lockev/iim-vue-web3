@@ -27,7 +27,7 @@
 
 <script lang="ts" setup>
 import { useWalletStore } from '../stores/wallet'
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, inject } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter()
@@ -44,6 +44,8 @@ const nft = reactive({
   price: 0,
 })
 
+const toast = inject('toast') as any
+
 const mockNFTs = [
   {
     token: 12345,
@@ -55,7 +57,12 @@ const mockNFTs = [
 ]
 
 const buyNFT = () => {
-  router.push({ name: 'Home' })
+  console.log(toast)
+  toast.title = 'NFT bought'
+  toast.message = 'You have successfully bought the NFT'
+  toast.success = false
+
+  // router.push({ name: 'Home' })
 }
 
 const loadNFT = () => {
