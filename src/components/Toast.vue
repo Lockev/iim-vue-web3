@@ -6,7 +6,6 @@
     >
       <div class="flex flex-shrink-0 justify-between p-4 gap-3">
         <div class="flex gap-2">
-          {{ props.success }}
           <img
             :src="props.success ? '/carbon-checkmark-outline.svg' : '/carbon-close-outline.svg'"
             :class="['w-8 h-6', props.success ? 'text-green-400' : 'text-red-400']"
