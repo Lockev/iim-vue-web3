@@ -9,17 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-
 import { useWalletStore } from '../stores/wallet'
 
-export default defineComponent({
-  setup() {
-    const walletStore = useWalletStore()
-
-    return {
-      walletStore,
-    }
-  },
-})
+const walletStore = useWalletStore()
 </script>
