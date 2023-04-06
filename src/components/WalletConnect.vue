@@ -28,8 +28,6 @@ import { useWalletStore } from '../stores/wallet'
 import Web3 from 'web3';
 
 const walletStore = useWalletStore()
-const targetNetwork = import.meta.env.VITE_BLOCKCHAIN_NETWORK_NAME
-const targetNetworkId = import.meta.env.VITE_BLOCKCHAIN_NETWORK_ID
 
 const connected = ref(false);
 const toast = inject('toast') as any
