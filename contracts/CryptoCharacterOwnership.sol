@@ -12,7 +12,8 @@ contract CryptoCharacterOwnership is ERC721, CryptoCharacterFactory {
 
     event CharacterBought(address _owner, uint _tokenId); 
 
-    constructor() ERC721("CryptoCharacter", "CCH") {}
+    constructor() ERC721("CryptoCharacter", "CCH") {        
+    }
 
 
     function buyCharacter(uint _tokenId) public payable canGetMoreCharacter(numberOfCharacterByOwner[msg.sender]) sentEnoughEther {
