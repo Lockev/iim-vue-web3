@@ -35,8 +35,11 @@ const toast = inject('toast') as any
 const connectWallet = async () => {
   try {
     window.ethereum.request({ method: 'eth_requestAccounts' })
-    .then((e) => {
-      console.log(e);
+    .then((data: string[]) => {
+      walletStore.saveWalletData({
+        address: data[0],
+        acc_short: ''
+      })
       connected.value = true;
 
       toast.success = true;
