@@ -25,7 +25,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useWalletStore } from '../stores/wallet'
 import { reactive, onMounted, ref, inject } from "vue";
 import { useRouter } from "vue-router";
 import Web3 from 'web3';
@@ -33,7 +32,7 @@ import { abi } from '../assets/buildContract.json';
 
 const web3 = new Web3(Web3.givenProvider);
 const CONTRACT = '0xFFE8993bcec7da4786c9b567C86D1a8013CC8ce9';
-let contract;
+let contract: any;
 
 const router = useRouter()
 const queryToken = router.currentRoute.value.query.token
@@ -51,11 +50,23 @@ const nft = reactive({
 
 const toast = inject('toast') as any
 
-const buyNFT = () => {
-  console.log(toast)
-  toast.title = 'NFT bought'
-  toast.message = 'You have successfully bought the NFT'
-  toast.success = true
+const buyNFT = async () => {
+
+  try {
+    const result = await contract.methods.mint(queryToken).send({
+      from: window.ethereum.selectedAddress,
+      value: web3.utils.toWei(nft.data.price, "ether")     
+    });
+    toast.title = 'NFT bought'
+    toast.message = 'You have successfully bought the NFT'
+    toast.success = true
+  } catch (err) {
+    let formattedErr = err.message.replace("[ethjs-query] while formatting outputs from RPC '", '');
+    formattedErr = formattedErr.substring(0, formattedErr.length - 1);
+    toast.title = 'NFT Error'
+    toast.message = JSON.parse(formattedErr).value.data.data.reason
+    toast.success = false
+  }
 
   // router.push({ name: 'Home' })
 }
