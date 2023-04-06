@@ -1,8 +1,8 @@
 <template>
   <!-- This example requires Tailwind CSS v2.0+ -->
-  <nav class="bg-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
+  <nav class="flex w-full bg-gray-800">
+    <div class="flex w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex w-full justify-between h-20">
         <div class="flex">
           <div class="-ml-2 mr-2 flex items-center md:hidden">
             <!-- Mobile menu button -->
@@ -55,12 +55,12 @@
           <div class="flex-shrink-0 flex items-center">
             <img
               class="block lg:hidden h-8 w-auto"
-              src="https://soliditytips.com/terminal-icon.png"
+              src="/ethereum-logo.svg"
               alt="SolidityTips.com logo"
             />
             <img
               class="hidden lg:block h-8 w-auto"
-              src="https://soliditytips.com/terminal-icon.png"
+              src="/ethereum-logo.svg"
               alt="SolidityTips.com logo"
             />
           </div>
@@ -68,15 +68,17 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <router-link
               :to="{ name: 'Home' }"
-              class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+              class="px-3 py-2 rounded-md text-sm font-medium"
+              :class="router.currentRoute.value.name === 'Home' ? 'bg-gray-900 text-white' : 'hover:bg-gray-500 text-gray-400'"
               aria-current="page"
               >Home</router-link
             >
 
             <router-link
-              :to="{ name: 'About' }"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >About</router-link
+              :to="{ name: 'Me' }"
+              class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              :class="router.currentRoute.value.name === 'Me' ? 'bg-gray-900 text-white' : 'hover:bg-gray-500 text-gray-400'"
+              >Me</router-link
             >
           </div>
         </div>
@@ -108,6 +110,7 @@
                 focus:ring-indigo-500
               "
             >
+            vreijvbreiojbn
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 mr-2"
@@ -141,53 +144,46 @@
         <router-link
           :to="{ name: 'Home' }"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+          :class="router.currentRoute.value.name === 'Home' ? 'bg-gray-700 text-white' : 'hover:bg-gray-500 text-gray'"
           aria-current="page"
           >Home</router-link
         >
 
         <router-link
-          :to="{ name: 'About' }"
+          :to="{ name: 'Me' }"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+          :class="router.currentRoute.value.name === 'Me' ? 'bg-gray-700 text-white' : 'hover:bg-gray-500 text-gray'"
           aria-current="page"
-          >About</router-link
+          >Me</router-link
         >
       </div>
     </div>
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-// import { useWalletStore } from '../stores/wallet'
+<script lang="ts" setup>
+import {ref, watch} from 'vue'
+import { useWalletStore } from '../stores/wallet'
 import WalletConnect from './WalletConnect.vue'
+import {useRouter} from "vue-router";
 
-export default defineComponent({
-  components: { WalletConnect },
-  // setup() {
-  //   const walletStore = useWalletStore()
-  //   const isOpen = ref<boolean>(false)
+const isOpen = ref<boolean>(false)
+const walletStore = useWalletStore()
+const router = useRouter()
 
-  //   const connectWallet = async () => {
-  //     try {
-  //       // @ts-expect-error Window.ethereum not typed
-  //       const data = await window.ethereum.request({
-  //         method: 'eth_requestAccounts',
-  //       })
-  //       console.log('data :>> ', data)
+const connectWallet = async () => {
+  try {
+    // @ts-expect-error Window.ethereum not typed
+    const data = await window.ethereum.request({
+      method: 'eth_requestAccounts',
+    })
+    console.log('data :>> ', data)
 
-  //       walletStore.saveWalletData({ address: data[0] })
-  //       console.log('DApp connected to your wallet 💰')
-  //     } catch (error) {
-  //       console.error('Error connecting DApp to your wallet')
-  //       console.error(error)
-  //     }
-  //   }
-  //   return {
-  //     connectWallet,
-  //     walletStore,
-  //     isOpen,
-  //   }
-  // },
-})
+    walletStore.saveWalletData({ address: data[0] })
+    console.log('DApp connected to your wallet 💰')
+  } catch (error) {
+    console.error('Error connecting DApp to your wallet')
+    console.error(error)
+  }
+}
 </script>
