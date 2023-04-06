@@ -56,8 +56,7 @@
           &copy; 2023 by Lockev
         </p>
         <p class="text-center md:text-left text-base text-gray-400">
-          Visit <a href="https://soliditytips.com">SolidityTips.com</a> to learn
-          more about solidity and web3
+          Made with <span class="text-red-500">&hearts;</span> by Group 1.
         </p>
       </div>
     </div>
