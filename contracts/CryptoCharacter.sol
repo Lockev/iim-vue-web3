@@ -46,7 +46,7 @@ contract CryptoCharacter is ERC721 {
     }
 
     function getCharacter(uint256 _id) external view returns (Character memory) {
-        return characters[_id - 1];
+        return characters[_id];
     }
 
     function getCharacters() external view returns (Character[] memory) {

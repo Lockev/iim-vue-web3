@@ -7,7 +7,7 @@
     <div class="flex flex-col gap-2 sm:max-w-1/2 max-w-60 sm:gap-4">
       <h1 class="text-3xl font-semibold">{{ nft.data.name }}</h1>
 
-      <div class="flex flex-col gap-2 p-4 sm:pr-20 font-medium rounded-xl border border-dashed	border-gray-300">
+      <div v-if="!isYours" class="flex flex-col gap-2 p-4 sm:pr-20 font-medium rounded-xl border border-dashed	border-gray-300">
         <h1 class="text-xl">{{ nft.data.price }} ETH <span class="font-light text-sm text-gray-500">(2.85 USD)</span></h1>
         <button
           class="py-2 px-4 transition duration-200 bg-pink-600 text-white font-bold rounded-lg hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-pink-700"
@@ -15,6 +15,9 @@
         >
           Buy
         </button>
+      </div>
+      <div v-else>
+        <h1 class="text-xl">Cet Avatar vous appartient !</h1>
       </div>
     </div>
   </template>
@@ -25,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted, ref, inject } from "vue";
+import { reactive, onMounted, ref, inject, computed } from "vue";
 import { useRouter } from "vue-router";
 import Web3 from 'web3';
 import { abi } from '../assets/buildContract.json';
@@ -51,7 +54,6 @@ const nft = reactive({
 const toast = inject('toast') as any
 
 const buyNFT = async () => {
-
   try {
     const result = await contract.methods.mint(queryToken).send({
       from: window.ethereum.selectedAddress,
@@ -60,6 +62,7 @@ const buyNFT = async () => {
     toast.title = 'NFT bought'
     toast.message = 'You have successfully bought the NFT'
     toast.success = true
+    router.push({ name: 'Home' })
   } catch (err) {
     let formattedErr = err.message.replace("[ethjs-query] while formatting outputs from RPC '", '');
     formattedErr = formattedErr.substring(0, formattedErr.length - 1);
@@ -68,8 +71,11 @@ const buyNFT = async () => {
     toast.success = false
   }
 
-  // router.push({ name: 'Home' })
 }
+
+const isYours = computed(() => {
+  return nft.data.owner.toUpperCase() == window.ethereum.selectedAddress.toUpperCase()
+})
 
 const loadNFT = async () => {
   const id = queryToken as string;
