@@ -31,16 +31,14 @@ const walletStore = useWalletStore()
 const targetNetwork = import.meta.env.VITE_BLOCKCHAIN_NETWORK_NAME
 const targetNetworkId = import.meta.env.VITE_BLOCKCHAIN_NETWORK_ID
 
-const error = ref('');
 const connected = ref(false);
 const toast = inject('toast') as any
 
-// checks network and connects wallet
 const connectWallet = async () => {
   try {
     window.ethereum.request({ method: 'eth_requestAccounts' })
     .then(() => {
-      connected.value = true; // If users successfully connected their wallet
+      connected.value = true; 
     });
 
     toast.success = true;
