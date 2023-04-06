@@ -1,58 +1,78 @@
 <template>
-  <div class="flex flex-col">
-  <div v-if="!error" class="text-center pt-8 container max-w-8xl mx-auto mb-auto px-4">
-    <h1 class="text-3xl font-semibold mb-8">{{ selectedNft.name }}</h1>
-  </div>
-  <div v-else class="text-center pt-12">
-    <h1 class="text-4xl mb-8">NFT not found</h1>
-  </div>
-  <div v-if="!error" class="container flex-wrap mt-32">
-    <div class="flex space-between">
-      <div class="w-3/5 mx-4">
-      <h3 class="text-xl mb-5 text-center font-semibold">Description NFT</h3>
-      <p class="text-sm text-justify">{{ selectedNft.description }}</p>
-      </div>
-      <div class="w-2/5 mx-4">
-        <img class="rounded-[15px]" :src="selectedNft.image">
-        <div class="footerNft flex justify-between">
-          <h1 class="text-2xl font-semibold mt-5">0.1 ETH</h1>
-          <button class="transition duration-200 bg-pink-600 hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-pink-700 text-white font-bold py-2 px-4 rounded mt-5">Buy NFT</button>
-        </div>
+  <div class="flex flex-col sm:flex-row w-full justify-center max-w-4xl mx-auto gap-4 md:gap-8 px-4 pt-8">
+    <template v-if="!error">
+    <div class="h-80 max-w-60 sm:max-w-1/2">
+      <img :src="nft.src" class="object-cover h-full w-full rounded-xl" />
+    </div>
+    <div class="flex flex-col gap-2 sm:max-w-1/2 max-w-60 sm:gap-4">
+      <h1 class="text-3xl font-semibold">{{ nft.name }}</h1>
+      <div class="flex max-w-md">{{ nft.description }}</div>
+
+      <div class="flex flex-col gap-4 p-4 sm:pr-20 font-medium rounded-xl border border-dashed	border-gray-300">
+        <h1 class="text-xl">{{ nft.price }} ETH <span class="font-light text-sm text-gray-500">(2.85 USD)</span></h1>
+        <button 
+          class="py-2 px-4 transition duration-200 bg-pink-600 text-white font-bold rounded-lg" hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-pink-700 
+          @click="buyNFT"
+        >
+          Buy
+        </button>
       </div>
     </div>
-  </div>
+  </template>
+  <template v-else>
+    <h1 class="text-3xl mb-8">NFT not found</h1>
+  </template>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useWalletStore } from '../stores/wallet'
-import {computed, onMounted, ref} from "vue";
-import router from "../router";
+import { reactive, onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 
 const walletStore = useWalletStore()
-const idQuery = router.currentRoute.value.query.id
+const queryToken = router.currentRoute.value.query.token
 const error = ref(true)
-const nft = ref({
-  id: 0,
+
+const nft = reactive({
+  token: 0,
   name: '',
   description: '',
-  image: ''
+  src: '',
+  price: 0,
 })
-const mokeNFTs = [
+
+const mockNFTs = [
   {
-    id: 1,
+    token: 12345,
     name: 'Bored Ap Yacht Club',
     description: 'Bored Ap Yacht Club is a collection of 10,000 unique NFTs on the Ethereum blockchain. Each Bored Ap is a unique combination of 5 traits: Body, Eyes, Mouth, Hat, and Background.',
-    image: 'https://picsum.photos/600/600',
-  }]
-const selectedNft: { id: number, name: string, description: string, image: string } | unknown = computed(() => {
-  return nft.value
-})
-onMounted(() => {
-  const nftFound = mokeNFTs.find(nft => nft.id === Number(idQuery))
+    src: 'https://picsum.photos/600/600',
+    price: 0.01,
+  }
+]
+
+const buyNFT = () => {
+  router.push({ name: 'Home' })
+}
+
+const loadNFT = () => {
+  const nftFound = mockNFTs.find(nft => nft.token === Number(queryToken))
   if (!nftFound) return
+
+  nft.token = nftFound.token
+  nft.name = nftFound.name
+  nft.description = nftFound.description
+  nft.src = nftFound.src
+  nft.price = nftFound.price
+
   error.value = false
-  nft.value = nftFound
+}
+
+onMounted(() => {
+  loadNFT()
 })
 
 </script>

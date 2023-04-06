@@ -1,17 +1,7 @@
 <template>
   <!-- This example requires Tailwind CSS v2.0+ -->
-  <footer class="bg-white">
-    <div
-      class="
-        max-w-7xl
-        mx-auto
-        py-8
-        px-4
-        sm:px-6
-        md:flex md:items-center md:justify-between
-        lg:px-8
-      "
-    >
+  <footer class="absolute bottom-0 flex w-full bg-white">
+    <div class="flex justify-between w-full max-w-4xl mx-auto py-8 px-4 sm:px-6 md:flex items-center md:justify-between lg:px-8">
       <div class="flex justify-center space-x-6 md:order-2">
         <a
           target="_blank"
@@ -33,12 +23,12 @@
           </svg>
         </a>
       </div>
-      <div class="mt-8 md:mt-0 md:order-1">
+      <div class="sm:mt-8 md:mt-0 order-1">
         <p class="text-center md:text-left text-base text-gray-400">
-          &copy; 2023 by Lockev
+          &copy; 2023, Crypto Character. All rights reserved.
         </p>
         <p class="text-center md:text-left text-base text-gray-400">
-          Made with <span class="text-red-400">&hearts;</span> by Group 1.
+          Made with <span class="text-red-400">&hearts;</span> by Crypto Character collective.
         </p>
       </div>
     </div>

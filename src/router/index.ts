@@ -14,12 +14,6 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   {
-    path: '/buy',
-    name: 'Buy',
-    component: () => import('../views/Buy.vue'),
-  },
-
-  {
     path: '/nft',
     name: 'NFT',
     component: () => import('../views/NFT.vue'),

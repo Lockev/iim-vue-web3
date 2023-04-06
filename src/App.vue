@@ -7,9 +7,9 @@ import Footer from '@/components/Footer.vue'
 </script>
 
 <template>
-  <div class="flex flex-col h-screen justify-between">
+  <div class="flex flex-col h-screen justify-start items-center">
     <NavBar />
-    <router-view class="max-w-8xl mx-auto mb-auto px-4" />
+    <router-view />
     <Footer />
   </div>
 </template>
