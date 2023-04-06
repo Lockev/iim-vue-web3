@@ -24,12 +24,12 @@ let contract;
 
 async function getCharacters() {
   contract = new web3.eth.Contract(abi as any, CONTRACT);
-  
-  // return contract.methods.getCharacters().call();
+  return contract.methods.getCharacters().call();
 }
 
 onMounted(async () => {
   nfts.data = await getCharacters();
+  console.log(nfts.data)
 })
 const nfts = reactive({
   data: [] as any

@@ -1,7 +1,6 @@
 <template>
   <div class="flex flex-col gap-2 p-4 w-fit group cursor-pointer" @click="goToNft">
     <div class="relative flex justify-center items-center transition group-hover:-mt-2">
-      {{ data.nft }}
       <p class="absolute font-bold text-2xl text-transparent group-hover:text-white transition ease-in-out">{{  data.nft.name }}</p>
       <img :src="'https://gateway.pinata.cloud/ipfs/' + data.nft[2]" class="h-40 md:h-50 w-40 md:w-50 rounded-lg" />
     </div>
