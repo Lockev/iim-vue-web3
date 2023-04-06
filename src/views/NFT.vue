@@ -60,7 +60,7 @@ const buyNFT = () => {
   console.log(toast)
   toast.title = 'NFT bought'
   toast.message = 'You have successfully bought the NFT'
-  toast.success = false
+  toast.success = true
 
   // router.push({ name: 'Home' })
 }

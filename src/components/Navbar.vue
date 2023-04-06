@@ -68,14 +68,16 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <router-link
               :to="{ name: 'Home' }"
-              class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+              class="px-3 py-2 rounded-md text-sm font-medium"
+              :class="router.currentRoute.value.name === 'Home' ? 'bg-gray-900 text-white' : 'hover:bg-gray-500 text-gray-400'"
               aria-current="page"
               >Home</router-link
             >
 
             <router-link
               :to="{ name: 'Me' }"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              :class="router.currentRoute.value.name === 'Me' ? 'bg-gray-900 text-white' : 'hover:bg-gray-500 text-gray-400'"
               >Me</router-link
             >
           </div>
@@ -142,6 +144,7 @@
         <router-link
           :to="{ name: 'Home' }"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+          :class="router.currentRoute.value.name === 'Home' ? 'bg-gray-700 text-white' : 'hover:bg-gray-500 text-gray'"
           aria-current="page"
           >Home</router-link
         >
@@ -149,6 +152,7 @@
         <router-link
           :to="{ name: 'Me' }"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+          :class="router.currentRoute.value.name === 'Me' ? 'bg-gray-700 text-white' : 'hover:bg-gray-500 text-gray'"
           aria-current="page"
           >Me</router-link
         >
@@ -158,12 +162,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import {ref, watch} from 'vue'
 import { useWalletStore } from '../stores/wallet'
 import WalletConnect from './WalletConnect.vue'
+import {useRouter} from "vue-router";
 
 const isOpen = ref<boolean>(false)
 const walletStore = useWalletStore()
+const router = useRouter()
 
 const connectWallet = async () => {
   try {
