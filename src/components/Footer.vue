@@ -15,7 +15,7 @@
       <div class="flex justify-center space-x-6 md:order-2">
         <a
           target="_blank"
-          href="https://github.com/uf4no"
+          href="https://github.com/Lockev/iim-vue-web3"
           class="text-gray-400 hover:text-gray-500 transition"
         >
           <span class="sr-only">GitHub</span>

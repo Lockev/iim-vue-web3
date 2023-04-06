@@ -9,7 +9,7 @@ import Footer from '@/components/Footer.vue'
 <template>
   <div class="flex flex-col h-screen justify-between">
     <NavBar />
-    <router-view class="container max-w-8xl mx-auto mb-auto px-4" />
+    <router-view class="max-w-8xl mx-auto mb-auto px-4" />
     <Footer />
   </div>
 </template>
