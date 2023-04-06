@@ -177,10 +177,8 @@ const connectWallet = async () => {
     const data = await window.ethereum.request({
       method: 'eth_requestAccounts',
     })
-    console.log('data :>> ', data)
 
     walletStore.saveWalletData({ address: data[0] })
-    console.log('DApp connected to your wallet 💰')
   } catch (error) {
     console.error('Error connecting DApp to your wallet')
     console.error(error)

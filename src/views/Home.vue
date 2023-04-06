@@ -19,7 +19,6 @@ const walletStore = useWalletStore()
 
 const web3 = new Web3(Web3.givenProvider);
 const CONTRACT = import.meta.env.VITE_CONTRACT_ADDRESS;
-console.log(CONTRACT);
 let contract;
 
 

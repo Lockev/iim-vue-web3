@@ -18,10 +18,9 @@
  *
  */
 
-// require('dotenv').config();
-// const PASS_PHRASE = process.env["PASSPHRASE"];
-// const APIKEY_GOERLI = process.env["API_KEY_GOERLI"];
-// const APIKEY_MUMBAI = process.env["API_KEY_MUMBAI"];
+require('dotenv').config();
+const PASS_PHRASE = process.env["PASSPHRASE"];
+const APIKEY_MUMBAI = process.env["API_KEY_MUMBAI"];
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
