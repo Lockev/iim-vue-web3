@@ -7,14 +7,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "pinia": "^2.0.6",
-    "vue": "^3.2.25",
-    "vue-router": "^4.0.0-0",
     "@openzeppelin/contracts": "^4.8.2",
     "@truffle/hdwallet-provider": "^2.1.9",
     "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "pinia": "^2.0.6",
     "truffle": "^5.8.1",
-    "web3": "^1.9.0"  
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.0-0",
+    "web3": "^1.9.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.1",
