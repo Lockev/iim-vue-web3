@@ -55,12 +55,12 @@
           <div class="flex-shrink-0 flex items-center">
             <img
               class="block lg:hidden h-8 w-auto"
-              src="https://soliditytips.com/terminal-icon.png"
+              src="/ethereum-logo.svg"
               alt="SolidityTips.com logo"
             />
             <img
               class="hidden lg:block h-8 w-auto"
-              src="https://soliditytips.com/terminal-icon.png"
+              src="/ethereum-logo.svg"
               alt="SolidityTips.com logo"
             />
           </div>
