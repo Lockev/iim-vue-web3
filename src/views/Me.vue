@@ -1,6 +1,6 @@
 <template>
-  <div class="pt-12 text-center">
-    <h1 class="text-2xl mb-8">This is the About page</h1>
+  <div class="text-center pt-8">
+    <h1 class="text-3xl font-semibold mb-8">This is the About page</h1>
     <p v-if="walletStore.address != ''">
       Your wallet address is: {{ walletStore.address }}
     </p>
@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useWalletStore } from '../stores/wallet'
 
 const walletStore = useWalletStore()
