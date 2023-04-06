@@ -17,7 +17,7 @@
         </button>
       </div>
       <div v-else>
-        <h1 class="text-xl">Cet Avatar vous appartient !</h1>
+        <h1 class="text-xl">Ce NFT vous appartient !</h1>
       </div>
     </div>
   </template>
