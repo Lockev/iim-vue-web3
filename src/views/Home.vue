@@ -18,7 +18,8 @@ import { abi } from '../assets/buildContract.json';
 const walletStore = useWalletStore()
 
 const web3 = new Web3(Web3.givenProvider);
-const CONTRACT = '0xFFE8993bcec7da4786c9b567C86D1a8013CC8ce9';
+const CONTRACT = import.meta.env.VITE_CONTRACT_ADDRESS;
+console.log(CONTRACT);
 let contract;
 
 
@@ -29,7 +30,6 @@ async function getCharacters() {
 
 onMounted(async () => {
   nfts.data = await getCharacters();
-  console.log(nfts.data)
 })
 const nfts = reactive({
   data: [] as any
