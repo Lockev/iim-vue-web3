@@ -29,7 +29,7 @@ provide("toast", toastState)
     <router-view />
     <Footer />
     <Toast 
-      :is-success="toastState.success"
+      :success="toastState.success"
       :title="toastState.title"
       :message="toastState.message"
       :display-interval="toastState.displayInterval"
